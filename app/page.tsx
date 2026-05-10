@@ -129,7 +129,7 @@ const About = () => {
   )
 }
 
-const Experience = () => {
+const Experience = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const experiences = [
     {
       title: "TECHNICAL LEADERSHIP",
@@ -157,15 +157,15 @@ const Experience = () => {
     <section className="py-40 px-6 md:px-20">
       <div className="max-w-7xl mx-auto">
         <TextReveal className="text-2xl font-mono mb-20 uppercase tracking-widest italic">EXPERIENCE</TextReveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-current/20">
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-px ${isDarkMode ? 'bg-white/20' : 'bg-black/20'}`}>
           {experiences.map((exp, i) => (
-            <div key={i} className="bg-white border border-current p-12 transition-colors group">
-              <span className="block font-mono text-xs opacity-50 mb-4 tracking-widest">{exp.role}</span>
-              <h3 className="text-4xl md:text-5xl font-display font-black leading-none mb-8">{exp.title}</h3>
-              <ul className="space-y-2 opacity-70 group-hover:opacity-100">
+            <div key={i} className={`${isDarkMode ? 'bg-transparent text-white border-white' : 'bg-gray-100 text-black border-black'} border p-12 transition-colors group`}>
+              <span className={`block font-mono text-xs ${isDarkMode ? 'text-white opacity-60' : 'text-black opacity-60'} mb-4 tracking-widest`}>{exp.role}</span>
+              <h3 className={`text-4xl md:text-5xl font-display font-black leading-none mb-8 ${isDarkMode ? 'text-white' : 'text-black'}`}>{exp.title}</h3>
+              <ul className={`space-y-2 ${isDarkMode ? 'text-white opacity-70' : 'text-black opacity-80'} group-hover:opacity-100`}>
                 {exp.items.map((item, j) => (
                   <li key={j} className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 bg-current rounded-full" />
+                    <span className={`w-1.5 h-1.5 ${isDarkMode ? 'bg-white' : 'bg-black'} rounded-full`} />
                     {item}
                   </li>
                 ))}
@@ -344,6 +344,38 @@ const NamZoedSection = () => {
   )
 }
 
+const BrandBookCTA = () => {
+  return (
+    <section className="py-40 px-6 md:px-20">
+      <div className="max-w-7xl mx-auto">
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="border border-current p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-12 group hover:bg-white hover:text-black transition-all duration-500"
+        >
+          <div className="flex-1">
+            <TextReveal className="text-5xl md:text-7xl font-display font-black leading-none mb-6 uppercase">
+              Brand Book
+            </TextReveal>
+            <TextReveal className="text-lg md:text-xl font-sans text-white/60 group-hover:text-black/60 leading-relaxed">
+              Explore my complete visual identity system—logo design, color palette, typography, design principles, and brand applications. A comprehensive guide to the ANUP aesthetic.
+            </TextReveal>
+          </div>
+          <motion.a
+            href="/brand-book"
+            whileHover={{ x: 10 }}
+            className="group/btn flex-shrink-0 w-16 h-16 border border-current flex items-center justify-center font-display font-black text-3xl"
+          >
+            →
+          </motion.a>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 const Footer = () => {
   return (
     <footer className="py-20 px-6 md:px-20 font-mono">
@@ -385,7 +417,7 @@ const Footer = () => {
             </span>
             <div className="flex flex-col gap-2 text-xl uppercase">
               <a href="https://linkedin.com/in/anup-gurung" target="_blank" className="hover:line-through transition-all">LINKEDIN</a>
-              <a href="#" className="hover:line-through transition-all">GITHUB</a>
+              <a href="https://github.com" className="hover:line-through transition-all">GITHUB</a>
               <a href="#" className="hover:line-through transition-all">INSTAGRAM</a>
             </div>
           </div>
@@ -400,50 +432,38 @@ const Footer = () => {
 }
 
 export default function PortfolioPage() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  })
-
-  // Adjusted interpolation points for expanded content
-  const bgColor = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.15, 0.25, 0.3, 0.45, 0.5, 0.65, 0.7, 0.85, 0.9, 1],
-    ["#FFFFFF", "#FFFFFF", "#000000", "#000000", "#FFFFFF", "#FFFFFF", "#000000", "#000000", "#FFFFFF", "#FFFFFF", "#000000", "#000000"]
-  )
-  
-  const textColor = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.15, 0.25, 0.3, 0.45, 0.5, 0.65, 0.7, 0.85, 0.9, 1],
-    ["#000000", "#000000", "#FFFFFF", "#FFFFFF", "#000000", "#000000", "#FFFFFF", "#FFFFFF", "#000000", "#000000", "#FFFFFF", "#FFFFFF"]
-  )
-
-  const bgColorVar = useTransform(bgColor, (v) => v as string)
+  const [isDarkMode, setIsDarkMode] = useState(true)
 
   return (
     <motion.main 
-      ref={containerRef}
-      style={{ backgroundColor: bgColor, color: textColor, ['--bg-color' as any]: bgColorVar }}
-      className="min-h-screen transition-colors duration-700"
+      className={`min-h-screen transition-colors duration-700 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-black'}`}
     >
       <CustomCursor />
       
-      <nav className="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-[100] font-mono text-xs md:text-sm mix-blend-difference pointer-events-none">
-        <div className="bg-white text-black px-2 py-1 pointer-events-auto cursor-pointer font-black uppercase tracking-tighter">AG [2026]</div>
-        <div className="text-white pointer-events-auto hidden md:block">
-          <ul className="flex gap-12 uppercase cursor-pointer tracking-widest italic">
+      <nav className="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-[100] font-mono text-xs md:text-sm pointer-events-none">
+        <div className={`${isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} px-2 py-1 pointer-events-auto cursor-pointer font-black uppercase tracking-tighter`}>AG [2026]</div>
+        <div className={`pointer-events-auto hidden md:block`}>
+          <ul className={`flex gap-12 uppercase cursor-pointer tracking-widest italic ${isDarkMode ? 'text-white' : 'text-black'}`}>
             <li className="hover:line-through transition-all">INFO</li>
             <li className="hover:line-through transition-all">WORK</li>
             <li className="hover:line-through transition-all">SKILLS</li>
             <li className="hover:line-through transition-all">CONTACT</li>
+            <li><a href="/brand-book" className="hover:line-through transition-all text-cyan-400">BRAND BOOK</a></li>
+            <li>
+              <button
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className="hover:line-through transition-all"
+              >
+                {isDarkMode ? '☀️' : '🌙'}
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
 
       <Hero />
       <About />
-      <Experience />
+      <Experience isDarkMode={isDarkMode} />
       <Projects />
       <SkillsAndEducation />
       <NamZoedSection />
