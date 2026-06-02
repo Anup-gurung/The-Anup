@@ -129,7 +129,7 @@ const About = () => {
   )
 }
 
-const Experience = ({ isDarkMode }: { isDarkMode: boolean }) => {
+const Experience = () => {
   const experiences = [
     {
       title: "TECHNICAL LEADERSHIP",
@@ -157,15 +157,15 @@ const Experience = ({ isDarkMode }: { isDarkMode: boolean }) => {
     <section className="py-40 px-6 md:px-20">
       <div className="max-w-7xl mx-auto">
         <div className="text-2xl font-mono mb-20 uppercase tracking-widest italic">EXPERIENCE</div>
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-px ${isDarkMode ? 'bg-white/20' : 'bg-black/20'}`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/20">
           {experiences.map((exp, i) => (
-            <div key={i} className={`${isDarkMode ? 'bg-transparent text-white border-white' : 'bg-gray-100 text-black border-black'} border p-12 transition-colors group`}>
-              <span className={`block font-mono text-xs ${isDarkMode ? 'text-white opacity-60' : 'text-black opacity-60'} mb-4 tracking-widest`}>{exp.role}</span>
-              <h3 className={`text-4xl md:text-5xl font-display font-black leading-none mb-8 ${isDarkMode ? 'text-white' : 'text-black'}`}>{exp.title}</h3>
-              <ul className={`space-y-2 ${isDarkMode ? 'text-white opacity-70' : 'text-black opacity-80'} group-hover:opacity-100`}>
+            <div key={i} className="bg-transparent text-white border border-white p-12 transition-colors group">
+              <span className="block font-mono text-xs text-white opacity-60 mb-4 tracking-widest">{exp.role}</span>
+              <h3 className="text-4xl md:text-5xl font-display font-black leading-none mb-8 text-white">{exp.title}</h3>
+              <ul className="space-y-2 text-white opacity-70 group-hover:opacity-100">
                 {exp.items.map((item, j) => (
                   <li key={j} className="flex items-center gap-2">
-                    <span className={`w-1.5 h-1.5 ${isDarkMode ? 'bg-white' : 'bg-black'} rounded-full`} />
+                    <span className="w-1.5 h-1.5 bg-white rounded-full" />
                     {item}
                   </li>
                 ))}
@@ -432,38 +432,28 @@ const Footer = () => {
 }
 
 export default function PortfolioPage() {
-  const [isDarkMode, setIsDarkMode] = useState(true)
-
   return (
     <motion.main 
-      className={`min-h-screen transition-colors duration-700 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-black'}`}
+      className="min-h-screen bg-black text-white"
     >
       <CustomCursor />
       
       <nav className="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-center z-[100] font-mono text-xs md:text-sm pointer-events-none">
-        <div className={`${isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} px-2 py-1 pointer-events-auto cursor-pointer font-black uppercase tracking-tighter`}>AG [2026]</div>
-        <div className={`pointer-events-auto hidden md:block`}>
-          <ul className={`flex gap-12 uppercase cursor-pointer tracking-widest italic ${isDarkMode ? 'text-white' : 'text-black'}`}>
+        <div className="bg-white text-black px-2 py-1 pointer-events-auto cursor-pointer font-black uppercase tracking-tighter">AG [2026]</div>
+        <div className="pointer-events-auto hidden md:block">
+          <ul className="flex gap-12 uppercase cursor-pointer tracking-widest italic text-white">
             <li className="hover:line-through transition-all">INFO</li>
             <li className="hover:line-through transition-all">WORK</li>
             <li className="hover:line-through transition-all">SKILLS</li>
             <li className="hover:line-through transition-all">CONTACT</li>
             <li><a href="/brand-book" className="hover:line-through transition-all text-cyan-400">BRAND BOOK</a></li>
-            <li>
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className="hover:line-through transition-all"
-              >
-                {isDarkMode ? '☀️' : '🌙'}
-              </button>
-            </li>
           </ul>
         </div>
       </nav>
 
       <Hero />
       <About />
-      <Experience isDarkMode={isDarkMode} />
+      <Experience />
       <Projects />
       <SkillsAndEducation />
       <NamZoedSection />
