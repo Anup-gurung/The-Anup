@@ -2,6 +2,22 @@
   "name": "ai-studio-applet",
   "version": "0.1.0",
   "private": true,
+  "description": "Personal website",
+  "homepage": "https://github.com/Anup-gurung/The-Anup#readme",
+  "bugs": {
+    "url": "https://github.com/Anup-gurung/The-Anup/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anup-gurung/The-Anup.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

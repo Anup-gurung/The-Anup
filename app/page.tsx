@@ -6,7 +6,7 @@ import CustomCursor from '@/components/cursor'
 
 // --- Helpers ---
 
-const TextReveal = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
+const div = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
   return (
     <div className={`overflow-hidden ${className}`}>
       <motion.div
@@ -78,9 +78,9 @@ const Hero = () => {
         </motion.h1>
       </div>
       <div className="mt-12 flex flex-col items-center gap-6 max-w-2xl px-6">
-        <TextReveal className="text-lg md:text-2xl font-mono text-center tracking-tighter">
+        <div className="text-lg md:text-2xl font-mono text-center tracking-tighter">
           FULL-STACK DEVELOPER | TECHNOPRENEUR | CREATIVE TECHNOLOGIST
-        </TextReveal>
+        </div>
         <p className="text-center font-sans opacity-60 text-sm md:text-base leading-relaxed">
           Building scalable digital products, blending technology, design, and real-world impact.
         </p>
@@ -109,17 +109,17 @@ const About = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-current pt-20">
           <div className="space-y-4">
-            <TextReveal className="text-3xl font-display font-black">PRECISION</TextReveal>
+            <div className="text-3xl font-display font-black">PRECISION</div>
             <p className="font-mono text-sm opacity-60 uppercase">Technical Excellence</p>
             <p>Led cross-functional teams to design and deploy scalable platforms, improving operational efficiency by up to 50%.</p>
           </div>
           <div className="space-y-4">
-            <TextReveal className="text-3xl font-display font-black">STRATEGY</TextReveal>
+            <div className="text-3xl font-display font-black">STRATEGY</div>
             <p className="font-mono text-sm opacity-60 uppercase">Creative Problem Solving</p>
             <p>Designed optimized databases and scalable APIs, improving query performance by 25% in high-traffic environments.</p>
           </div>
           <div className="space-y-4">
-            <TextReveal className="text-3xl font-display font-black">IMPACT</TextReveal>
+            <div className="text-3xl font-display font-black">IMPACT</div>
             <p className="font-mono text-sm opacity-60 uppercase">Real-World Results</p>
             <p>Developed responsive applications focused on accessibility, improving user engagement by 30–40%.</p>
           </div>
@@ -156,7 +156,7 @@ const Experience = ({ isDarkMode }: { isDarkMode: boolean }) => {
   return (
     <section className="py-40 px-6 md:px-20">
       <div className="max-w-7xl mx-auto">
-        <TextReveal className="text-2xl font-mono mb-20 uppercase tracking-widest italic">EXPERIENCE</TextReveal>
+        <div className="text-2xl font-mono mb-20 uppercase tracking-widest italic">EXPERIENCE</div>
         <div className={`grid grid-cols-1 md:grid-cols-2 gap-px ${isDarkMode ? 'bg-white/20' : 'bg-black/20'}`}>
           {experiences.map((exp, i) => (
             <div key={i} className={`${isDarkMode ? 'bg-transparent text-white border-white' : 'bg-gray-100 text-black border-black'} border p-12 transition-colors group`}>
@@ -202,7 +202,7 @@ const Projects = () => {
       className="py-40 px-6 md:px-20 relative"
     >
       <div className="max-w-7xl mx-auto">
-        <TextReveal className="text-2xl font-mono mb-20 uppercase tracking-widest italic">SELECTED WORKS</TextReveal>
+        <div className="text-2xl font-mono mb-20 uppercase tracking-widest italic">SELECTED WORKS</div>
         
         <div className="space-y-0 border-t border-current">
           {projects.map((project, idx) => (
@@ -263,7 +263,7 @@ const SkillsAndEducation = () => {
     <section className="py-40 px-6 md:px-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
         <div>
-           <TextReveal className="text-2xl font-mono mb-12 uppercase tracking-widest italic italic">SKILLS</TextReveal>
+           <div className="text-2xl font-mono mb-12 uppercase tracking-widest italic italic">SKILLS</div>
            <div className="space-y-12">
              <div>
                <h4 className="font-display font-black text-2xl uppercase mb-4">Frontend</h4>
@@ -286,7 +286,7 @@ const SkillsAndEducation = () => {
         
         <div className="space-y-24">
           <div>
-            <TextReveal className="text-2xl font-mono mb-12 uppercase tracking-widest italic italic">EDUCATION</TextReveal>
+            <div className="text-2xl font-mono mb-12 uppercase tracking-widest italic italic">EDUCATION</div>
             <div className="space-y-8">
               <div>
                 <h4 className="font-display font-black text-3xl uppercase leading-tight">Bachelor of Computer Science</h4>
@@ -305,7 +305,7 @@ const SkillsAndEducation = () => {
           </div>
 
           <div>
-            <TextReveal className="text-2xl font-mono mb-12 uppercase tracking-widest italic italic">AWARDS & LANGUAGES</TextReveal>
+            <div className="text-2xl font-mono mb-12 uppercase tracking-widest italic italic">AWARDS & LANGUAGES</div>
             <div className="grid grid-cols-2 gap-8">
               <div className="space-y-2 font-sans">
                 <p className="font-mono text-xs opacity-50 uppercase">Certificates</p>
@@ -331,9 +331,9 @@ const NamZoedSection = () => {
     <section className="py-40 overflow-hidden">
       <Marquee text="NAMZOED • BHUTAN&apos;S FIRST SUPER APP • LIVE NOW • JOIN THE ECOSYSTEM • " />
       <div className="mt-20 px-6 md:px-20 max-w-7xl mx-auto text-center">
-        <TextReveal className="text-7xl md:text-[10vw] font-display font-black leading-none mb-10">
+        <div className="text-7xl md:text-[10vw] font-display font-black leading-none mb-10">
           NAMZOED
-        </TextReveal>
+        </div>
         <div className="max-w-2xl mx-auto">
           <p className="text-xl md:text-2xl font-sans text-white leading-relaxed">
             Reimagining accessibility in the Himalayas. One app to rule all services, connecting Bhutan like never before.
@@ -356,12 +356,12 @@ const BrandBookCTA = () => {
           className="border border-current p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-12 group hover:bg-white hover:text-black transition-all duration-500"
         >
           <div className="flex-1">
-            <TextReveal className="text-5xl md:text-7xl font-display font-black leading-none mb-6 uppercase">
+            <div className="text-5xl md:text-7xl font-display font-black leading-none mb-6 uppercase">
               Brand Book
-            </TextReveal>
-            <TextReveal className="text-lg md:text-xl font-sans text-white/60 group-hover:text-black/60 leading-relaxed">
+            </div>
+            <div className="text-lg md:text-xl font-sans text-white/60 group-hover:text-black/60 leading-relaxed">
               Explore my complete visual identity system—logo design, color palette, typography, design principles, and brand applications. A comprehensive guide to the ANUP aesthetic.
-            </TextReveal>
+            </div>
           </div>
           <motion.a
             href="/brand-book"
